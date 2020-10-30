@@ -1,0 +1,116 @@
+https://leetcode.com/problems/add-two-numbers/
+
+
+method 1
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    
+
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode *dummyhead=new ListNode(0);
+        ListNode *l=dummyhead;
+            int carry=0;
+        
+        while(l1!=NULL || l2!=NULL)
+        {
+           int sum=0;
+            sum+=carry;
+            if(l1!=NULL)
+            {
+                sum+=l1->val;
+                l1=l1->next;
+            }
+            
+            if(l2!=NULL)
+            {
+                sum+=l2->val;
+                l2=l2->next;
+            }
+            l->next=new ListNode(sum%10);
+            carry=sum/10;
+            sum=sum%10;
+            l=l->next;
+        }
+        if(carry!=0)
+        {
+            l->next=new ListNode(carry);
+        }
+        return dummyhead->next;
+    }
+};
+
+
+
+method2
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    
+
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode *newhead=NULL;
+        ListNode *temp=NULL;
+            int carry=0;
+        
+        while(l1!=NULL || l2!=NULL)
+        {
+           int sum=0;
+            sum+=carry;
+            if(l1!=NULL)
+            {
+                sum+=l1->val;
+                l1=l1->next;
+            }
+            
+            if(l2!=NULL)
+            {
+                sum+=l2->val;
+                l2=l2->next;
+            }
+            carry=sum/10;
+            sum=sum%10;
+            
+           if(newhead==NULL)
+           {
+               ListNode *n=new ListNode(sum);
+               newhead=n;
+               temp=newhead;
+           }
+            else
+            {
+                ListNode *n=new ListNode(sum);
+               temp->next=n;
+               temp=temp->next;
+            }
+        }
+        if(carry!=0)
+        {
+            ListNode *n=new ListNode(carry);
+              temp->next=n;
+               
+        }
+        return newhead;
+    }
+};
