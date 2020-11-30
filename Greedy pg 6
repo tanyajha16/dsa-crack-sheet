@@ -1,0 +1,50 @@
+Winning Lottery
+Send Feedback
+Harshit knows by his resources that this time the winning lottery number is the smallest number whose sum of the digits is S and the number of digits is D. You have to help Harshit and print the winning lottery number.
+Input Format
+The Input line contains two space-separated integers: S,D
+Output Format
+The output contains a single integer denoting the winning lottery number
+Constraints
+1 <= D <= 1000
+1 <= S <= 9*D
+Time Limit: 1 second
+Sample Input1:
+9 2
+Sample Output1:
+18
+Explanation
+There are many other possible numbers like 45, 54, 90, etc with the sum of digits as 9 and number of digits as 2. The smallest of them is 18.
+
+
+#include<bits/stdc++.h>
+using namespace std;
+int main() {
+
+	// Write your code here
+    int sum,digits;
+    cin >> sum >> digits;
+    int curr = sum - 1;
+    int total = 0;
+    int dig = 0;
+    int arr[digits+1] = {0};
+    while(dig != digits - 1){
+        if(curr >= 9){
+            arr[dig] = 9;
+            curr = curr - arr[dig];
+        }
+        else{
+            arr[dig] = curr;
+            curr = curr - arr[dig];
+        }
+        // cout << arr[dig] << endl;
+        dig++;
+    }
+    arr[dig] = 1+curr;
+    // cout << arr[dig] << endl;
+    for(int i=dig;i>=0;i--){
+        cout << arr[i];
+    }
+    // cout << endl;
+    // cout << arr[0];
+}
