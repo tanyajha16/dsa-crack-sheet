@@ -1,0 +1,56 @@
+Activity Selection
+Send Feedback
+You are given n activities with their start and finish times. Select the maximum number of activities that can be performed by a single person, assuming that a person can only work on a single activity at a time.
+Input
+The first line of input contains one integer denoting N.
+Next N lines contains two space separated integers denoting the start time and finish time for the ith activity.
+
+Output
+Output one integer, the maximum number of activities that can be performed
+Constraints
+1 ≤ N ≤ 10^6
+1 ≤ ai, di ≤ 10^9
+Sample Input
+6
+1 2
+3 4
+0 6
+5 7
+8 9
+5 9
+Sample Output
+4
+
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+bool compare(pair<int,int>p1,pair<int,int>p2)
+{
+  if(p1.second<p2.second)
+      return true;
+  return false;
+}
+int main()
+{
+    ll n;
+    cin>>n;
+    pair<int,int> p[n];
+    for(ll i=0;i<n;i++)
+    {
+        ll x,y;
+        cin>>x>>y;
+        p[i]=make_pair(x,y);
+    }
+    sort(p,p+n,compare);
+    ll x=p[0].second;
+    ll c=1;
+    for(ll i=1;i<n;i++)
+    {
+        if(p[i].first>=x)
+        {
+            c++;
+        x=p[i].second;
+        }
+    }
+    cout<<c<<endl;
+}
